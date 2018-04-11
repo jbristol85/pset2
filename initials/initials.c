@@ -7,7 +7,7 @@
 int main(void)
 {
     string name = get_string();  // prompt for name
-    char initials[4];  // initialize an array accepting 3 chars
+    char initials[4];  // initialize an array accepting 4 chars
     int quantitySpaces = 1;  // counting the spaces
     int index = 1;  //counting the index of the string
     initials[0] = toupper(name[0]);  // sets the first index of the initials array to the first initial in uppercase
