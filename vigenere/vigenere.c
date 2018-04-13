@@ -7,13 +7,25 @@
 int main(int argc, string argv[])  // main function with 2 arguments
 {
     // string key;  // itializing variables
-    int i, k;
-    string key;
+    int i;
+    int k = 0;
+    string key, argstr;
 
     if (argc == 2)  // checking for 2 arguments
     {
-        key = argv[1]; // setting the str argument to variable
-
+        argstr = argv[1]; // setting the str argument to variable
+        for (int z = 0; z < strlen(argstr); z++)
+        {
+            if (isalpha(argstr[z]))
+            {
+                key = argstr;
+            }
+            else
+            {
+                printf("Usage: ./vigenere k\n");
+                return 1;
+            }
+        }
 
 
         string p = get_string("plaintext: ");  // prompt for plaintext
@@ -27,79 +39,50 @@ int main(int argc, string argv[])  // main function with 2 arguments
             // key length % to get get index
             //add index into remainder of caesars
             // printf("itterate through k %i & ", k);
-
             char character = p[i];  // set the iterated char to variable
             int keyindex;
             char keycipher;
-
-
             if (!isalpha(character))  // check if it's not alphebetic
             {
                 printf("%c", character);  // print character
             }
             else
             {
-                for(k = 0; k < strlen(key); k++)
+
+                if (isalpha(p[i]))
                 {
-                    if(k > strlen(key))
-                    {
-                        keyindex = key[k];
+                    keyindex = k % strlen(key);
 
-                        if  (isupper(keyindex))  // check if uppercase
-                        {
-                            keycipher = keyindex - 'A';
-                        }
-                        else if (!isupper(keyindex))  // check if lowercase
-                        {
-                            keycipher = keyindex - 'a';
-                        }
-                    }
-                    else
+                    if (isupper(key[keyindex]))   // check if uppercase
                     {
-                        k = 0;
+                        keycipher = key[keyindex] - 'A';
                     }
+                    else if (!isupper(key[keyindex]))  // check if lowercase
+                    {
+                        keycipher = key[keyindex] - 'a';
+                    }
+                    k++;
+                }
 
-                    if (isupper(character))  // check if uppercase
-                    {
-                        int alphabetic = character - 'A';  // convert to alphabetic index
-                        char cipher = ((alphabetic + keycipher) % 26) + 'A';  // move character position
-                        printf("%c", cipher);  // print
-                    }
-                    else // if (!isupper(character))  // check if lowercase
-                    {
-                        int alphabetic = character - 'a';
-                        char cipher = ((alphabetic + keycipher) % 26) + 'a';
-                        printf("%c", cipher);
-                    }
-
+                if (isupper(character))  // check if uppercase
+                {
+                    int alphabetic = character - 'A';  // convert to alphabetic index
+                    char cipher = ((alphabetic + keycipher) % 26) + 'A';  // move character position
+                    printf("%c", cipher);  // print
+                }
+                else // if (!isupper(character))  // check if lowercase
+                {
+                    int alphabetic = character - 'a';
+                    char cipher = ((alphabetic + keycipher) % 26) + 'a';
+                    printf("%c", cipher);
                 }
             }
-
         }
         printf("\n");  // print line break
     }
     else  // if no second argument is passed into main
     {
-        printf("Usage: ./caesar k\n");
+        printf("Usage: ./vigenere k\n");
         return 1;
     }
-
 }
-
-    // if (!isalpha(character))
-    //         {
-    //             k = k-1;
-    //         }
-
-    //       else if  (isupper(keyindex))  // check if uppercase
-    //         {
-    //             keycipher = keyindex - 'A';  // convert to alphabetic index
-    //             // keycipher = ((alphabetic + keyindex) % 26) + 'A';  // move character position
-
-    //         }
-    //         else if (!isupper(keyindex))  // check if lowercase
-    //         {
-    //             keycipher = keyindex - 'a';
-    //             // keycipher = ((alphabetic + keyindex) % 26) + 'a';
-
-    //         }
