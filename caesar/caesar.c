@@ -49,3 +49,6 @@ int main(int argc, string argv[])  // main function with 2 arguments
     }
 
 }
+
+// Comments:
+//I really like your organization and the amount of comments you put. It makes it really easy to see what everything does.
